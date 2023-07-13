@@ -10,17 +10,15 @@ bareServer = defaultBare;
 
 const app = express();
 
-app.use('/', express.static('public', {
+app.use(config.WEBDIR, express.static('public'), {
   setHeaders: function (res, path, stat) {
     res.set('Cache-Control', 'public, max-age=3600');
   }
-}));
-
-app.use(config.WEBDIR, express.static('public'));
+});
 app.use("*",handle404)
-
 app.use((req, res, next) => {
     res.set('x-timestamp', Date.now())
+    res.removeHeader('x-powered-by')
     next();
 });
 
