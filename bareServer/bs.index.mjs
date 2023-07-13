@@ -14,9 +14,14 @@ app.use(config.WEBDIR, express.static('public'));
 app.use("*",handle404)
 app.use((req, res, next) => {
     res.set('x-timestamp', Date.now())
-    // res.set('x-powered-by', 'hideip.network')
     next();
 });
+
+app.use('/', express.static('public', {
+  setHeaders: function (res, path, stat) {
+    res.set('Cache-Control', 'public, max-age=3600');
+  }
+}));
 
 const sourceRequest = (req, res) => {
     if (bareServer.shouldRoute(req)) {
