@@ -1,4 +1,4 @@
-import createBareServer from '@tomphttp/bare-server-node';
+import { createBareServer } from '@tomphttp/bare-server-node';
 import { SocksProxyAgent } from 'socks-proxy-agent';
 import * as socksFun from '../utils/socks5.mjs';
 
