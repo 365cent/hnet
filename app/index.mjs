@@ -1,7 +1,9 @@
 import http from 'node:http';
 import * as bare from "../bareServer/bs.index.mjs";
 
-const httpServer = http.createServer();
+const httpServer = http.createServer((req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+});
 
 httpServer.on('request', bare.sourceRequest);
 
